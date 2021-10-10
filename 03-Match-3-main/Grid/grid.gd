@@ -15,7 +15,8 @@ var new_position = Vector2(0,0)
 var possible_pieces = [
 	load("res://Pieces/Red.tscn"),
 	load("res://Pieces/Green.tscn"),
-	load("res://Pieces/Blue.tscn")
+	load("res://Pieces/Blue.tscn"),
+	load("res://Pieces/fish.tscn")
 ]
 
 var all_pieces
@@ -23,6 +24,8 @@ var all_pieces
 var first_touch
 var final_touch
 var controlling = false
+
+var sound_add = null
 
 export (PackedScene) var background
 
@@ -66,6 +69,11 @@ func generate_pieces():
 			add_child(piece)
 			piece.position = Vector2(xStart + i * offset, yStart - j * offset)
 			all_pieces[i][j] = piece
+			
+			if sound_add == null:
+				sound_add = get_node_or_null("/root/Game/Add")
+			if sound_add != null:
+				sound_add.play()
 
 func check_for_matches(column, row, color):
 	#Check Left
@@ -199,6 +207,10 @@ func destroy_matched():
 			if(all_pieces[i][j].is_matched):
 				all_pieces[i][j].die()
 				all_pieces[i][j] = null
+				if sound_add == null:
+					sound_add = get_node_or_null("/root/Game/Add")
+				if sound_add != null:
+					sound_add.play()
 	collapse_columns()
 
 func collapse_columns():

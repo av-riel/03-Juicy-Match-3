@@ -1,10 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Grid/grid.gd" type="Script" id=1]
 [ext_resource path="res://Pieces/Piece Background.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/HUD.gd" type="Script" id=3]
+[ext_resource path="res://avi assets/background.png" type="Texture" id=4]
+[ext_resource path="res://avi assets/icemove.wav" type="AudioStream" id=5]
+[ext_resource path="res://avi assets/icego1.wav" type="AudioStream" id=6]
+[ext_resource path="res://avi assets/Retiring_Soon.ogg" type="AudioStream" id=7]
+[ext_resource path="res://avi assets/iceadd1.wav" type="AudioStream" id=8]
+[ext_resource path="res://UI/Music.gd" type="Script" id=9]
 
 [node name="Game" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 466.169, 528.008 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 4 )
 
 [node name="grid" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -15,6 +26,8 @@ yStart = 832
 offset = 128
 background = ExtResource( 2 )
 
+[node name="Effects" type="Node2D" parent="."]
+
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -24,6 +37,32 @@ __meta__ = {
 }
 
 [node name="Score" type="Label" parent="HUD"]
-margin_right = 576.0
-margin_bottom = 20.0
+margin_left = 3.1748
+margin_top = 7.14331
+margin_right = 579.175
+margin_bottom = 27.1433
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Score: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = 0.05
+autoplay = true
+script = ExtResource( 9 )
+
+[node name="Add" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = 24.0
+
+[node name="Remove" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = 24.0
+
+[node name="Move" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = 24.0
+
+[connection signal="finished" from="Music" to="Music" method="_on_Music_finished"]

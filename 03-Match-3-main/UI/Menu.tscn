@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://UI/Menu.gd" type="Script" id=1]
+[ext_resource path="res://avi assets/startscreen.png" type="Texture" id=2]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -9,6 +10,12 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -496.487, -15.1659 )
+scale = Vector2( 0.55, 0.7 )
+texture = ExtResource( 2 )
+centered = false
 
 [node name="Background" type="ColorRect" parent="."]
 margin_left = 10.0
@@ -26,6 +33,9 @@ margin_bottom = 512.0
 text = "Welcome to Match-3"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Play" type="Button" parent="."]
 margin_left = 238.0
@@ -43,5 +53,9 @@ margin_top = 562.0
 margin_right = 338.0
 margin_bottom = 602.0
 text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
